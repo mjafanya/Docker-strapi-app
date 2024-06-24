@@ -1,6 +1,7 @@
 variable "private_key_path" {
   description = "Path to the private key file"
   type        = string
+  default     = "/root/Docker-strapi-app/new-keypair.pem "
 }
 
 resource "aws_security_group" "strapi_sg" {
