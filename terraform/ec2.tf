@@ -4,7 +4,7 @@ variable "private_key_path" {
 }
 
 resource "aws_security_group" "strapi_sg" {
-  name        = "bharat-security-group"
+  name        = "jafanya-security-group"
   description = "Security group for Strapi EC2 instance"
 
   ingress {
@@ -32,7 +32,7 @@ resource "aws_security_group" "strapi_sg" {
 resource "aws_instance" "strapi" {
   ami           = "ami-04b70fa74e45c3917"  # Correct AMI ID for ap-south-1
   instance_type = "t2.medium"              # Changed to t2.medium
-  key_name      = "Veera"                  # Your key pair name
+  key_name      = "new-keypair"                  # Your key pair name
   vpc_security_group_ids = [aws_security_group.strapi_sg.id]
 
   tags = {
@@ -46,7 +46,7 @@ resource "aws_instance" "strapi" {
       "sudo systemctl start docker",
       "sudo systemctl enable docker",
       "sudo apt-get install git -y",
-      "sudo docker run -d -p 80:80 -p 1337:1337 veera1016/strapi:1.0.0",
+      "sudo docker run -d -p 80:80 -p 1337:1337 jafanya/strapi:1.0.0",
   ]
 }
 
