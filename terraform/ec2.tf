@@ -5,7 +5,7 @@ variable "private_key_path" {
 }
 
 resource "aws_security_group" "strapi_sg" {
-  name        = "jafanya-security-group1"
+  name        = "jafanya-security-group2"
   description = "Security group for Strapi EC2 instance"
 
   ingress {
