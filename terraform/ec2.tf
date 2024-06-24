@@ -1,11 +1,11 @@
 variable "private_key_path" {
   description = "Path to the private key file"
   type        = string
-  default     = "/root/Docker-strapi-app/new-keypair.pem "
+  default     = "/Docker-strapi-app/new-keypair.pem "
 }
 
 resource "aws_security_group" "strapi_sg" {
-  name        = "jafanya-security-group2"
+  name        = "jafanya-security-group3"
   description = "Security group for Strapi EC2 instance"
 
   ingress {
@@ -40,17 +40,15 @@ resource "aws_instance" "strapi" {
     Name = "Strapi-Docker"
   }
 
-  provisioner "remote-exec" {
-  inline = [
-      "sudo apt-get update -y",
-      "sudo apt-get install -y docker.io",
-      "sudo systemctl start docker",
-      "sudo systemctl enable docker",
-      "sudo apt-get install git -y",
-      "sudo docker run -d -p 80:80 -p 1337:1337 jafanya/strapi:1.0.0",
-  ]
-}
-
+  user_data = <<-EOF
+      #!/bin/bash
+      sudo apt-get update -y
+      sudo apt-get install -y docker.io
+      sudo systemctl start docker
+      sudo systemctl enable docker
+      sudo apt-get install git -y
+      sudo docker run -d -p 80:80 -p 1337:1337 jafanya/strapi:1.0.0
+    EOF
 
     connection {
       type        = "ssh"
